@@ -13,7 +13,7 @@ export function Navbar({ page, setPage, maxPage, goTo }) {
     };
 
     return (
-        <div className="w-9/12 flex justify-between mt-10">
+        <div className="w-9/12 flex justify-between items-center mt-10">
             {page === 1 ? (
                 <p>Page: {page}</p>
             ) : (
