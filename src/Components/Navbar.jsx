@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CharactersContext } from "../Context/CharactersContext";
 
-export function Navbar({ page, setPage, maxPage, goTo }) {
-    const [inputValue, setInputValue] = useState();
+export function Navbar() {
+    const { page, setPage, maxPage, searchCharacters, goTo } =
+        useContext(CharactersContext);
+    const [inputValue, setInputValue] = useState(1);
 
     const onChange = (e) => {
         setInputValue(+e.target.value);
@@ -13,37 +16,48 @@ export function Navbar({ page, setPage, maxPage, goTo }) {
     };
 
     return (
-        <div className="w-9/12 flex justify-between items-center mt-10">
-            {page === 1 ? (
-                <p>Page: {page}</p>
-            ) : (
-                <button
-                    className="bg-blue-500 hover:bg-blue-700 p-2 rounded"
-                    onClick={() => setPage(page - 1)}
-                >
-                    Page {page - 1}
-                </button>
-            )}
+        <div className="w-9/12 grid grid-cols-2 max-md:grid-cols-1 mt-10 whitespace-nowrap">
+            <div className="col-span-1 flex items-center mx-3">
+                <label htmlFor="search">Search:</label>
+                <input
+                    type="text"
+                    id="search"
+                    className="bg-gray-800 text-white rounded p-2 appearance-none w-full ml-5 max-w-200"
+                    onChange={(e) => searchCharacters(e.target.value)}
+                />
+            </div>
             {goTo && (
-                <form onSubmit={handleSubmit}>
-                    <input
-                        className="bg-gray-800 text-white text-center rounded p-2 appearance-none w-full"
-                        type="number"
-                        min="1"
-                        max={maxPage}
-                        onChange={onChange}
-                    />
-                </form>
-            )}
-            {page === maxPage ? (
-                <p>Page: {page}</p>
-            ) : (
-                <button
-                    className="bg-blue-500 hover:bg-blue-700 p-2 rounded"
-                    onClick={() => setPage(page + 1)}
-                >
-                    Page {page + 1}
-                </button>
+                <div className="col-span-1 flex justify-between items-center max-md:mt-10">
+                    {page === 1 ? (
+                        <p>Page: {page}</p>
+                    ) : (
+                        <button
+                            className="bg-blue-500 hover:bg-blue-700 p-2 rounded"
+                            onClick={() => setPage(page - 1)}
+                        >
+                            Page {page - 1}
+                        </button>
+                    )}
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            className="bg-gray-800 text-white text-center rounded p-2 appearance-none w-full"
+                            type="number"
+                            min="1"
+                            max={maxPage}
+                            onChange={onChange}
+                        />
+                    </form>
+                    {page === maxPage ? (
+                        <p>Page: {page}</p>
+                    ) : (
+                        <button
+                            className="bg-blue-500 hover:bg-blue-700 p-2 rounded"
+                            onClick={() => setPage(page + 1)}
+                        >
+                            Page {page + 1}
+                        </button>
+                    )}
+                </div>
             )}
         </div>
     );
