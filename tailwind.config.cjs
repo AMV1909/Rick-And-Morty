@@ -5,7 +5,10 @@ module.exports = {
         extend: {
             maxWidth: {
                 200: "200px",
-            }
+            },
+            screens: {
+                "0": "0",
+            },
         },
     },
     plugins: [],

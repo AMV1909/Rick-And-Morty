@@ -8,7 +8,7 @@ export function H1() {
             onMouseOut={(e) => (e.currentTarget.style.filter = "none")}
             onClick={() => window.location.replace("/Rick-And-Morty/")}
         >
-            Rick and Morty
+            Rick & Morty
         </h1>
     );
 }

@@ -14,7 +14,7 @@ export function About() {
                 <H1 />
                 {character && (
                     <div>
-                        <div className="w-full mt-10 mx-10 flex justify-between items-center">
+                        <div className="w-full mt-10 md:mx-10 flex 0:flex-col md:flex-row justify-between items-center">
                             <div>
                                 <h1 className="text-3xl text-center">
                                     {character.name}
@@ -26,7 +26,7 @@ export function About() {
                                     alt={character.name}
                                 />
                             </div>
-                            <div>
+                            <div className="mt-10">
                                 <div className="flex items-baseline">
                                     <p className="text-xl list-item mr-2">
                                         Status:
