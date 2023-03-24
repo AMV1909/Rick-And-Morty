@@ -11,12 +11,16 @@ export function CharactersContextProvider({ children }) {
     const [goTo, setGoTo] = useState(true);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        getCharacters(page).then((data) => {
+    const getCharactersF = async (page) => {
+        await getCharacters(page).then((data) => {
             setCharacters(data.results);
             setMaxPage(data.info.pages);
             setLoading(false);
         });
+    };
+
+    useEffect(() => {
+        getCharactersF(page);
     }, [page]);
 
     const searchCharacters = async (search) => {
@@ -54,9 +58,14 @@ export function CharactersContextProvider({ children }) {
 
     const debouncedSearchCharacters = debounce(searchCharacters, 1000);
 
+    const getCharacterById = (id) => {
+        return characters.find((character) => character.id === id);
+    };
+
     return (
         <CharactersContext.Provider
             value={{
+                getCharactersF,
                 characters,
                 page,
                 setPage,
@@ -64,6 +73,7 @@ export function CharactersContextProvider({ children }) {
                 loading,
                 searchCharacters: debouncedSearchCharacters,
                 goTo,
+                getCharacterById,
             }}
         >
             {children}

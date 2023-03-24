@@ -22,7 +22,7 @@ export function Navbar() {
                 <input
                     type="text"
                     id="search"
-                    className="bg-gray-800 text-white rounded p-2 appearance-none w-full ml-5 max-w-200"
+                    className="bg-gray-800 text-white rounded p-2 appearance-none ml-5 max-w-200"
                     onChange={(e) => searchCharacters(e.target.value)}
                 />
             </div>
